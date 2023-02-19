@@ -44,10 +44,8 @@
 	}
 }
 
-.clock-day {
-}
-
 .clock-night {
+	filter: invert(90%);
 }
 
 @media screen and (min-width: $screen-tablet) {

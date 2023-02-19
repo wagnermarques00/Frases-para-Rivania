@@ -421,6 +421,10 @@ input:checked + .toggle .star--6 {
   font-weight: 600;
 }
 
+.clock-night {
+  filter: invert(90%);
+}
+
 @media screen and (min-width: 768px) {
   .clock {
     flex-direction: row;
@@ -492,6 +496,9 @@ input:checked + .toggle .star--6 {
      object-position: center;
   width: 100%;
 }
+.card .card__wrapper .card__image-night {
+  filter: invert(100%);
+}
 .card .card__wrapper .card__phrase {
   text-align: left;
   font-family: "Fira Sans", sans-serif;
@@ -503,6 +510,10 @@ input:checked + .toggle .star--6 {
   font-family: "Lato", sans-serif;
   font-weight: 300;
   font-style: italic;
+}
+
+.card-night {
+  filter: invert(90%);
 }
 
 @media screen and (min-width: 768px) {
@@ -555,6 +566,9 @@ input:checked + .toggle .star--6 {
 .player .player__image {
   display: none;
 }
+.player .player__image-night {
+  filter: invert(100%);
+}
 .player .player__wrapper {
   display: flex;
   align-items: center;
@@ -571,6 +585,10 @@ input:checked + .toggle .star--6 {
   font-family: "Fira Sans", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+.player-night {
+  filter: invert(90%);
 }
 
 @media screen and (min-width: 768px) {

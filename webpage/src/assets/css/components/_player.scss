@@ -12,6 +12,7 @@
 	background: #eeeeee;
 	border-radius: 10px;
 	box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+
 	.player__button,
 	.player__image {
 		gap: 1px;
@@ -23,8 +24,13 @@
 		border-radius: 6px;
 		box-shadow: inset -3px -3px 7px #ffffff73, inset 2px 2px 5px rgba(94, 104, 121, 0.288);
 	}
+
 	.player__image {
 		display: none;
+	}
+
+	.player__image-night {
+		filter: invert(100%);
 	}
 
 	.player__wrapper {
@@ -47,6 +53,10 @@
 			font-weight: 600;
 		}
 	}
+}
+
+.player-night {
+	filter: invert(90%);
 }
 
 @media screen and (min-width: $screen-tablet) {

@@ -31,7 +31,7 @@
 		</header>
 
 		<main>
-			<section class="clock clock-night">
+			<section class="clock" id="clock-wrapper">
 				<div class="clock__display">
 					<img class="clock__icon" src="./src/assets/img/clock.svg" loading="lazy" />
 					<h2 class="clock__text" id="clock"></h2>
@@ -41,9 +41,9 @@
 				</div>
 			</section>
 
-			<section class="card">
+			<section class="card" id="card">
 				<div class="card__wrapper">
-					<img class="card__image" src="./src/assets/img/test.jpg" alt="Lembrança" />
+					<img class="card__image" id="card__image" src="./src/assets/img/test.jpg" alt="Lembrança" />
 				</div>
 				<div class="card__wrapper">
 					<p class="card__phrase">
@@ -55,9 +55,13 @@
 				</div>
 			</section>
 
-			<section class="player">
+			<section class="player" id="player">
 				<img class="player__button" src="./src/assets/img/resume.svg" alt="Tocar/pausar playlist" />
-				<img class="player__image" src="./src/assets/img/1383354_599778530074976_729132350_n-580x580.jpg" />
+				<img
+					class="player__image"
+					id="player__image"
+					src="./src/assets/img/1383354_599778530074976_729132350_n-580x580.jpg"
+				/>
 				<div class="player__wrapper">
 					<p class="player__info" id="info-artist">A Banda Mais Bonita da Cidade</p>
 					<p class="player__info" id="info-music">
