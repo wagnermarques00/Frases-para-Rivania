@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="Frases, fotos e músicas para alegrar minha namorada" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<link rel="stylesheet" href="./src/assets/css/style.css" />
 
@@ -44,24 +44,36 @@
 
 			<section class="card" id="card">
 				<div class="card__wrapper">
-					<img class="card__image" id="card__image" src="./src/assets/img/test.jpg" alt="Lembrança" />
+					<img
+						class="card__image"
+						id="card__image"
+						src="./src/assets/img/test.jpg"
+						loading="lazy"
+						alt="Lembrança"
+					/>
 				</div>
 				<div class="card__wrapper">
-					<p class="card__phrase">
+					<p class="card__phrase" id="card__phrase">
 						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores vitae quibusdam nemo
 						commodi consectetur aliquid nesciunt delectus modi adipisci temporibus vero itaque ipsum
 						molestias quidem ab quod debitis, dolore fuga.
 					</p>
-					<q class="card__author">Alguém qualquer</q>
+					<p class="card__author" id="card__author"></p>
 				</div>
 			</section>
 
 			<section class="player" id="player">
-				<img class="player__button" src="./src/assets/img/resume.svg" alt="Tocar/pausar playlist" />
+				<img
+					class="player__button"
+					src="./src/assets/img/resume.svg"
+					loading="lazy"
+					alt="Tocar/pausar playlist"
+				/>
 				<img
 					class="player__image"
 					id="player__image"
 					src="./src/assets/img/1383354_599778530074976_729132350_n-580x580.jpg"
+					loading="lazy"
 					alt="Capa da música em reprodução no momento"
 				/>
 				<div class="player__wrapper">
@@ -77,5 +89,6 @@
 		<script src="./src/js/toggleTheme.js"></script>
 		<script src="./src/js/clock.js"></script>
 		<script src="./src/js/autoScrollPlayer.js"></script>
+		<script src="./src/js/phrasesRender.js" type="module"></script>
 	</body>
 </html>
