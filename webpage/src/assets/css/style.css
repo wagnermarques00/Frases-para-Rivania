@@ -463,10 +463,10 @@ input:checked + .toggle .star--6 {
     font-size: 3rem;
   }
   .clock .clock__display:first-child {
-    width: 20rem;
+    width: 30%;
   }
   .clock .clock__display:last-child {
-    width: 38rem;
+    width: 65%;
   }
 }
 .card {
