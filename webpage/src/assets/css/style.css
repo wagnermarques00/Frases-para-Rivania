@@ -534,12 +534,17 @@ input:checked + .toggle .star--6 {
 @media screen and (min-width: 1024px) {
   .card {
     flex-direction: row;
+    align-items: flex-start;
     gap: 0.5rem;
   }
   .card .card__wrapper .card__phrase {
     font-size: 1.8rem;
   }
   .card .card__wrapper:first-child {
+    width: 20%;
+    height: 20%;
+  }
+  .card .card__wrapper:last-child {
     width: 80%;
   }
 }

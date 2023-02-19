@@ -71,6 +71,7 @@
 @media screen and (min-width: $screen-computer) {
 	.card {
 		flex-direction: row;
+		align-items: flex-start;
 		gap: 0.5rem;
 
 		.card__wrapper {
@@ -80,6 +81,10 @@
 		}
 
 		.card__wrapper:first-child {
+			width: 20%;
+			height: 20%;
+		}
+		.card__wrapper:last-child {
 			width: 80%;
 		}
 	}
