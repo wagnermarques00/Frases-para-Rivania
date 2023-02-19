@@ -10,8 +10,8 @@
 		<title>Frases</title>
 	</head>
 	<body>
-		<header class="header">
-			<h1 class="header__title">Frases para Mozão ♥</h1>
+		<header class="header header-day" id="header">
+			<h1 class="header__title" id="header-title">Frases para Mozão ♥</h1>
 			<div class="toggleWrapper">
 				<input type="checkbox" class="dn" id="dn" />
 				<label for="dn" class="toggle">
@@ -31,9 +31,7 @@
 		</header>
 
 		<main>
-			<section class="resume"></section>
-
-			<section class="clock">
+			<section class="clock clock-night">
 				<div class="clock__display">
 					<img class="clock__icon" src="./src/assets/img/clock.svg" loading="lazy" />
 					<h2 class="clock__text" id="clock"></h2>
@@ -70,5 +68,8 @@
 				</div>
 			</section>
 		</main>
+		<script src="./src/js/toggleTheme.js"></script>
+		<script src="./src/js/clock.js"></script>
+		<script src="./src/js/autoScrollPlayer.js"></script>
 	</body>
 </html>
