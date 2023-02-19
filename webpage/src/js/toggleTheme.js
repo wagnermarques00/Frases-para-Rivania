@@ -3,10 +3,34 @@ const header = document.getElementById("header");
 const headerTitle = document.getElementById("header-title");
 const body = document.querySelector("body");
 
-backgroundToggle.addEventListener("click", () => {
-	body.classList.toggle("night");
-	header.classList.toggle("header-night");
-	headerTitle.classList.toggle("header__title-night");
+function setNightMode() {
+	body.classList.add("night");
+	header.classList.add("header-night");
+	headerTitle.classList.add("header__title-night");
+	backgroundToggle.checked = true;
+}
+
+function setDayMode() {
+	body.classList.remove("night");
+	header.classList.remove("header-night");
+	headerTitle.classList.remove("header__title-night");
+	backgroundToggle.checked = false;
+}
+
+function toggleMode() {
+	if (backgroundToggle.checked) {
+		setNightMode();
+	} else {
+		setDayMode();
+	}
+}
+
+window.addEventListener("load", () => {
+	if (backgroundToggle.checked) {
+		setNightMode();
+	} else {
+		setDayMode();
+	}
 });
 
-headerTitle;
+backgroundToggle.addEventListener("click", toggleMode);
