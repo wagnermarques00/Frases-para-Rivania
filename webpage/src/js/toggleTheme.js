@@ -42,7 +42,7 @@ function toggleMode() {
 	}
 }
 
-function checkTime() {
+function checkTimeAndApplyTheme() {
 	const date = new Date();
 	const hours = date.getHours();
 
@@ -54,7 +54,7 @@ function checkTime() {
 }
 
 window.addEventListener("load", () => {
-	checkTime();
+	checkTimeAndApplyTheme();
 });
 
 backgroundToggle.addEventListener("click", toggleMode);

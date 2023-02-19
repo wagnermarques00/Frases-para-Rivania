@@ -26,4 +26,4 @@ function clockUpdate() {
 	fullDate.textContent = `${day < 10 ? "0" + day : day} de ${months[month]} de ${year}`;
 }
 
-setInterval(clockUpdate, 1000);
+export default clockUpdate;
