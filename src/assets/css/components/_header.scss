@@ -1,0 +1,51 @@
+@import "../abstract/variables";
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 3rem;
+
+	.header__title {
+		display: none;
+		background-color: $afternoon-color-blue;
+	}
+	.header__title-night {
+		background-color: $night-color3;
+	}
+}
+
+@media screen and (min-width: $screen-tablet) {
+	.header {
+		justify-content: space-between;
+
+		.header__title {
+			display: block;
+			align-self: flex-start;
+
+			border-top-right-radius: 50px;
+			border-bottom-right-radius: 50px;
+
+			padding: 1rem 0.65rem 1rem 0.2rem;
+
+			font-family: $font-fira;
+			font-weight: 600;
+			color: $color-white;
+		}
+	}
+}
+
+@media screen and (min-width: $screen-computer) {
+	.header {
+		background-color: $afternoon-color-blue;
+		.header__title {
+			border-bottom: 1px solid $color-white;
+			border-right: 1px solid $color-white;
+		}
+	}
+	.header-night {
+		background-color: $night-color2;
+	}
+}

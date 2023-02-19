@@ -1,0 +1,25 @@
+@import "./variables";
+html,
+body {
+	height: auto;
+	min-height: 100vh;
+	box-sizing: border-box;
+}
+
+body {
+	background: $morning-gradient;
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+}
+body.night {
+	background: $night-gradient;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 3rem;
+
+	margin: 2rem 0;
+}

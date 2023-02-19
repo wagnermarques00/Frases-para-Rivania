@@ -1,0 +1,51 @@
+//Screen Sizes
+$screen-tablet: 768px;
+$screen-computer: 1024px;
+
+//Morning colors
+$morning-color-yellow: #f9ed69;
+$morning-color-orange: #f08a5d;
+$morning-color-pink: #b83b5e;
+$morning-color-purple: #6a2c70;
+$morning-gradient: linear-gradient(
+	to bottom,
+	$morning-color-yellow,
+	$morning-color-orange,
+	$morning-color-pink,
+	$morning-color-purple
+);
+
+//Afternoon colors
+$afternoon-color-blue: #6fb2d2;
+$afternoon-color-yellow: #ebd671;
+$afternoon-color-white: #eeeeee;
+
+//Night colors
+$night-color1: #e0aaff;
+$night-color2: #c77dff;
+$night-color3: #9d4edd;
+$night-color4: #7b2cbf;
+$night-color5: #5a189a;
+$night-color6: #3c096c;
+$night-color7: #240046;
+$night-color8: #10002b;
+$night-gradient: linear-gradient(
+	to bottom,
+	$night-color1,
+	$night-color2,
+	$night-color3,
+	$night-color4,
+	$night-color5,
+	$night-color6,
+	$night-color7,
+	$night-color8
+);
+
+//Common colors
+$color-white: #ffffff;
+$color-black: #000000;
+
+//Fonts
+$font-lato: "Lato", sans-serif;
+$font-fira: "Fira Sans", sans-serif;
+$font-cousine: "Cousine", monospace;
