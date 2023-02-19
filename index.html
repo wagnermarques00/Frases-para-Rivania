@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="./src/assets/css/style.css" />
+
+		<title>Frases</title>
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="header__title">Frases para Mozão ♥</h1>
+			<div class="toggleWrapper">
+				<input type="checkbox" class="dn" id="dn" />
+				<label for="dn" class="toggle">
+					<span class="toggle__handler">
+						<span class="crater crater--1"></span>
+						<span class="crater crater--2"></span>
+						<span class="crater crater--3"></span>
+					</span>
+					<span class="star star--1"></span>
+					<span class="star star--2"></span>
+					<span class="star star--3"></span>
+					<span class="star star--4"></span>
+					<span class="star star--5"></span>
+					<span class="star star--6"></span>
+				</label>
+			</div>
+		</header>
+
+		<main>
+			<section class="resume"></section>
+
+			<section class="clock">
+				<div class="clock__display">
+					<img class="clock__icon" src="./src/assets/img/clock.svg" loading="lazy" />
+					<h2 class="clock__text" id="clock"></h2>
+				</div>
+				<div class="clock__display">
+					<h2 class="date__text" id="date"></h2>
+				</div>
+			</section>
+
+			<section class="card">
+				<div class="card__wrapper">
+					<img class="card__image" src="./src/assets/img/test.jpg" alt="Lembrança" />
+				</div>
+				<div class="card__wrapper">
+					<p class="card__phrase">
+						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores vitae quibusdam nemo
+						commodi consectetur aliquid nesciunt delectus modi adipisci temporibus vero itaque ipsum
+						molestias quidem ab quod debitis, dolore fuga.
+					</p>
+					<q class="card__author">Alguém qualquer</q>
+				</div>
+			</section>
+
+			<section class="player">
+				<img class="player__button" src="./src/assets/img/resume.svg" alt="Tocar/pausar playlist" />
+				<img class="player__image" src="./src/assets/img/1383354_599778530074976_729132350_n-580x580.jpg" />
+				<div class="player__wrapper">
+					<p class="player__info" id="info-artist">A Banda Mais Bonita da Cidade</p>
+					<p class="player__info" id="info-music">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit cum, temporibus minus
+						reiciendis ea fugiat ex eius eos? Eum aliquid perferendis expedita aut ad laudantium ab odio.
+						Ullam, nostrum eum?
+					</p>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
