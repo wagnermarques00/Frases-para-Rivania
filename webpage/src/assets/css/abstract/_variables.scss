@@ -2,11 +2,14 @@
 $screen-tablet: 768px;
 $screen-computer: 1024px;
 
-//Morning colors
+//Day colors
 $morning-color-yellow: #f9ed69;
 $morning-color-orange: #f08a5d;
 $morning-color-pink: #b83b5e;
 $morning-color-purple: #6a2c70;
+$afternoon-color-blue: #1067c9;
+$afternoon-color-yellow: #ebd671;
+$afternoon-color-white: #eeeeee;
 $morning-gradient: linear-gradient(
 	to bottom,
 	$morning-color-yellow,
@@ -14,11 +17,6 @@ $morning-gradient: linear-gradient(
 	$morning-color-pink,
 	$morning-color-purple
 );
-
-//Afternoon colors
-$afternoon-color-blue: #1067c9;
-$afternoon-color-yellow: #ebd671;
-$afternoon-color-white: #eeeeee;
 
 //Night colors
 $night-color1: #e0aaff;
@@ -49,3 +47,10 @@ $color-black: #000000;
 $font-lato: "Lato", sans-serif;
 $font-fira: "Fira Sans", sans-serif;
 $font-cousine: "Cousine", monospace;
+
+//Icons
+$icon-family: "Material Symbols Outlined";
+$icon-play: "play_arrow";
+$icon-pause: "pause";
+$icon-previous: "skip_previous";
+$icon-next: "skip_next";

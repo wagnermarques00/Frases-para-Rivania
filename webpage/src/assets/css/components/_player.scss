@@ -6,27 +6,103 @@
 	align-items: center;
 	gap: 1rem;
 
-	padding: 1rem 2rem;
 	margin: 0 2rem;
+	padding: 1rem 2rem;
+	width: 65vw;
 
 	background: #eeeeee;
 	border-radius: 10px;
 	box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
 
-	.player__button,
-	.player__image {
-		gap: 1px;
+	.spotify {
+		padding: 0.5rem 2.5rem;
+		width: 10rem;
+		height: 3rem;
 
+		background-image: url("./src/assets/img/spotify/Spotify_Icon_RGB_Black.png");
+		border-radius: 1rem;
+		box-shadow: inset -3px -3px 7px #ffffff73, inset 2px 2px 5px rgba(94, 104, 121, 0.288);
+	}
+
+	.playback__wrapper {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		justify-content: center;
+
+		.player__button {
+			display: inline-block;
+			align-self: center;
+			position: relative;
+
+			height: 6rem;
+			padding: 0.5rem;
+			width: 6rem;
+
+			border-radius: 100%;
+			box-shadow: inset -3px -3px 7px #ffffff73, inset 2px 2px 5px rgba(94, 104, 121, 0.288);
+
+			&:first-child,
+			&:last-child {
+				height: 4rem;
+				width: 4rem;
+				border-radius: 1rem;
+			}
+		}
+
+		.play:before,
+		.pause:before {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			fill: 1;
+
+			color: $color-black;
+			font-family: $icon-family;
+			font-size: 6rem;
+			font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 48;
+		}
+
+		.previous:before,
+		.next:before {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			fill: 1;
+
+			color: $color-black;
+			font-family: $icon-family;
+			font-size: 3rem;
+			font-variation-settings: "FILL" 1, "wght" 600, "GRAD" 0, "opsz" 48;
+		}
+
+		.play:before {
+			content: $icon-play;
+		}
+
+		.pause:before {
+			content: $icon-pause;
+		}
+
+		.previous:before {
+			content: $icon-previous;
+		}
+
+		.next:before {
+			content: $icon-next;
+		}
+	}
+
+	.player__image {
+		display: none;
 		padding: 0.5rem;
 		width: 10rem;
 		height: 10rem;
 
 		border-radius: 6px;
 		box-shadow: inset -3px -3px 7px #ffffff73, inset 2px 2px 5px rgba(94, 104, 121, 0.288);
-	}
-
-	.player__image {
-		display: none;
 	}
 
 	.player__image-night {
@@ -65,6 +141,14 @@
 
 		padding: 2rem;
 		width: 85%;
+
+		.spotify {
+			padding: 0.3rem;
+			width: 3rem;
+			height: 3rem;
+
+			border-radius: 100%;
+		}
 
 		.player__button {
 			height: 4rem;

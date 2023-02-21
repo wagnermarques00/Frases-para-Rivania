@@ -53,13 +53,17 @@
 			</section>
 
 			<section class="player" id="player">
-				<img
-					class="player__button"
-					src="./src/assets/img/resume.svg"
-					loading="lazy"
-					id="play-pause"
-					alt="Tocar/pausar playlist"
-				/>
+				<picture>
+					<source media="(min-width: 768px)" srcset="./src/assets/img/spotify/Spotify_Icon_RGB_Black.png" />
+					<img class="spotify" src="./src/assets/img/spotify/Spotify_Logo_RGB_Black.png" loading="lazy" />
+				</picture>
+
+				<div class="playback__wrapper">
+					<div class="player__button previous" loading="lazy" id="player-previous"></div>
+					<div class="player__button play" loading="lazy" id="play-pause"></div>
+					<div class="player__button next" loading="lazy" id="player-next"></div>
+				</div>
+
 				<img
 					class="player__image"
 					id="player__image"
