@@ -1,4 +1,3 @@
-import autoScroll from "./src/js/autoScrollPlayer.js";
 import clockUpdate from "./src/js/clock.js";
 import renderPhoto from "./src/js/photosRender.js";
 import renderPhrase from "./src/js/phrasesRender.js";
@@ -17,9 +16,9 @@ const music = document.querySelector("#info-music");
 const photoTag = document.querySelector(".card__image");
 const player = document.getElementById("player");
 const playerImage = document.getElementById("player__image");
+const playerInfo = document.querySelector(".player__info");
 const quoteTag = document.querySelector(".card__phrase");
 
 setInterval(clockUpdate, 1000);
 renderPhoto(photoTag);
 renderPhrase(authorTag, quoteTag);
-autoScroll(music, artist, container);
