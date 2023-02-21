@@ -1,38 +1,59 @@
 import { CLIENT_ID, CLIENT_SECRET } from "../constants/spotifyAuth.js";
+import autoScroll from "./autoScrollPlayer.js";
 
-var redirect_uri = "http://127.0.0.1:5500/index.html";
-
+var access_token = "";
+var activeDevices = false;
 var client_id = "";
 var client_secret = "";
-var access_token = "";
+var defaultPlayer = true;
+var isPlaying = false;
+var playbackOffsetMS = 0;
+var playlist_id = "37i9dQZF1DX2vsux22VuNL";
+var redirect_uri = "http://127.0.0.1:5500/index.html";
 var refresh_token = "";
 
-const playerPlayPauseTag = document.querySelector("#play-pause");
-const playerImageTag = document.querySelector("#player__image");
 const playerArtistTag = document.querySelector("#info-artist");
+const playerImageTag = document.querySelector("#player__image");
+const playerInfo = document.querySelector(".player__info");
 const playerMusicNameTag = document.querySelector("#info-music");
+const playerNextTag = document.querySelector("#player-next");
+const playerPlayPauseTag = document.querySelector("#player-play-pause");
+const playerPreviousTag = document.querySelector("#player-previous");
+const playerSpotifyTag = document.querySelector("#spotify");
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
 const DEVICES = "https://api.spotify.com/v1/me/player/devices";
-const PLAYER = "https://api.spotify.com/v1/me/player";
-const PLAY = "https://api.spotify.com/v1/me/player/play";
 const PAUSE = "https://api.spotify.com/v1/me/player/pause";
+const PLAY = "https://api.spotify.com/v1/me/player/play";
+const PLAYLISTS = "https://api.spotify.com/v1/playlists";
+const PREVIOUS = "https://api.spotify.com/v1/me/player/previous";
+const NEXT = "https://api.spotify.com/v1/me/player/next";
 const TOKEN = "https://accounts.spotify.com/api/token";
 
 window.addEventListener("load", () => {
 	onPageLoad();
 });
 
+playerNextTag.addEventListener("click", () => {
+	next();
+});
+
 playerPlayPauseTag.addEventListener("click", () => {
+	togglePlayPause();
+});
+
+playerPreviousTag.addEventListener("click", () => {
+	previous();
+});
+
+playerSpotifyTag.addEventListener("click", () => {
 	requestAuthorization();
 });
 
-playerImageTag.addEventListener("click", () => {
-	refreshDevices();
-});
+setInterval(currentlyPlaying, 1000);
 
-function onPageLoad() {
+async function onPageLoad() {
 	client_id = localStorage.getItem("client_id");
 	client_secret = localStorage.getItem("client_secret");
 
@@ -40,44 +61,10 @@ function onPageLoad() {
 		handleRedirect();
 	} else {
 		access_token = localStorage.getItem("access_token");
-		// if (access_token == null) {
-		// 	document.getElementById("tokenSection").style.display = "block";
-		// } else {
-		// 	document.getElementById("deviceSection").style.display = "block";
 		refreshDevices();
 		currentlyPlaying();
-		// }
-	}
-}
-
-function checkLocalStorage() {
-	let id = localStorage.getItem("client_id");
-	let secret = localStorage.getItem("client_secret");
-	let access = localStorage.getItem("access_token");
-	let refresh = localStorage.getItem("refresh_token");
-
-	if (id) {
-		console.log("client_id saved to local storage: " + id);
-	} else {
-		console.log("client_id not saved to local storage");
-	}
-
-	if (secret) {
-		console.log("client_secret saved to local storage: " + secret);
-	} else {
-		console.log("client_secret not saved to local storage");
-	}
-
-	if (access) {
-		console.log("access_token saved to local storage: " + access);
-	} else {
-		console.log("access_token not saved to local storage");
-	}
-
-	if (refresh) {
-		console.log("refresh_token saved to local storage: " + refresh);
-	} else {
-		console.log("refresh_token not saved to local storage");
+		toggleIconPlayPause(isPlaying);
+		handleNoPlayback();
 	}
 }
 
@@ -104,10 +91,10 @@ function handleRedirect() {
 }
 
 function getCode() {
-	let code = null;
 	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	let code = null;
 	if (queryString.length > 0) {
-		const urlParams = new URLSearchParams(queryString);
 		code = urlParams.get("code");
 	}
 	return code;
@@ -134,8 +121,6 @@ function callAuthorizationApi(body) {
 function handleAuthorizationResponse() {
 	if (this.status == 200) {
 		var data = JSON.parse(this.responseText);
-		console.log(data);
-		var data = JSON.parse(this.responseText);
 		if (data.access_token != undefined) {
 			access_token = data.access_token;
 			localStorage.setItem("access_token", access_token);
@@ -147,7 +132,6 @@ function handleAuthorizationResponse() {
 		onPageLoad();
 	} else {
 		console.log(this.responseText);
-		alert(this.responseText);
 	}
 }
 
@@ -170,15 +154,33 @@ function refreshAccessToken() {
 
 function handleApiResponse() {
 	if (this.status == 200) {
-		console.log(this.responseText);
-		setTimeout(currentlyPlaying, 2000);
+		setTimeout(currentlyPlaying, 1000);
 	} else if (this.status == 204) {
-		setTimeout(currentlyPlaying, 2000);
+		setTimeout(currentlyPlaying, 1000);
 	} else if (this.status == 401) {
 		refreshAccessToken();
 	} else {
 		console.log(this.responseText);
-		alert(this.responseText);
+	}
+}
+
+function handleDevicesResponse() {
+	if (this.status == 200) {
+		var data = JSON.parse(this.responseText);
+		if (data.devices.length > 0) {
+			let active = data.devices.find((device) => device.is_active);
+			if (active !== undefined) {
+				activeDevices = true;
+				return active.id;
+			}
+		}
+	} else if (this.status == 401) {
+		refreshAccessToken();
+	} else if (this.status == 404) {
+		activeDevices = false;
+	} else {
+		activeDevices = false;
+		console.log(this.responseText);
 	}
 }
 
@@ -186,55 +188,111 @@ function refreshDevices() {
 	callApi("GET", DEVICES, null, handleDevicesResponse);
 }
 
-function play() {
-	let playlist_id = document.getElementById("playlists").value;
-	let trackindex = document.getElementById("tracks").value;
-	let album = document.getElementById("album").value;
-	let body = {};
-	if (album.length > 0) {
-		body.context_uri = album;
+async function togglePlayPause() {
+	if (isPlaying) {
+		pause();
+		playerPlayPauseTag.classList.toggle("pause", false);
+		playerPlayPauseTag.classList.toggle("play", true);
 	} else {
-		body.context_uri = "spotify:playlist:" + playlist_id;
+		play();
+		playerPlayPauseTag.classList.toggle("play", false);
+		playerPlayPauseTag.classList.toggle("pause", true);
 	}
+	isPlaying = !isPlaying;
+}
+
+function toggleIconPlayPause(isPlaying) {
+	if (isPlaying) {
+		playerPlayPauseTag.classList.toggle("pause", false);
+		playerPlayPauseTag.classList.toggle("play", true);
+	} else {
+		playerPlayPauseTag.classList.toggle("play", false);
+		playerPlayPauseTag.classList.toggle("pause", true);
+	}
+	isPlaying = !isPlaying;
+}
+
+function getPlaylist() {
+	let playlist = `${PLAYLISTS}/${playlist_id}`;
+	callApi("GET", playlist, null, handlePlaylistsResponse);
+}
+
+function handlePlaylistsResponse() {
+	if (this.status == 200) {
+		var data = JSON.parse(this.responseText);
+	} else if (this.status == 401) {
+		refreshAccessToken();
+	} else {
+		console.log(this.responseText);
+	}
+}
+
+function play() {
+	if (!defaultPlayer) {
+		callApi("PUT", PLAY, null, handleApiResponse);
+	} else {
+		playOnLoad();
+	}
+}
+
+function playOnLoad() {
+	defaultPlayer = false;
+	let body = {};
+	body.context_uri = "spotify:playlist:" + playlist_id;
 	body.offset = {};
-	body.offset.position = trackindex.length > 0 ? Number(trackindex) : 0;
-	body.offset.position_ms = 0;
-	callApi("PUT", PLAY + "?device_id=" + deviceId(), JSON.stringify(body), handleApiResponse);
+	body.offset.position = 0;
+	body.offset.position_ms = playbackOffsetMS;
+	callApi("PUT", PLAY, JSON.stringify(body), handleApiResponse);
 }
 
 function pause() {
-	callApi("PUT", PAUSE + "?device_id=" + deviceId(), null, handleApiResponse);
+	callApi("PUT", PAUSE, null, handleApiResponse);
+}
+
+function next() {
+	callApi("POST", NEXT, null, handleApiResponse);
+}
+
+function previous() {
+	callApi("POST", PREVIOUS, null, handleApiResponse);
 }
 
 function currentlyPlaying() {
-	callApi("GET", PLAYER + "?market=US", null, handleCurrentlyPlayingResponse);
+	callApi("GET", CURRENTLYPLAYING, null, handleCurrentlyPlayingResponse);
+	getPlaylist();
+	refreshDevices();
+	handleNoPlayback();
 }
 
 function handleCurrentlyPlayingResponse() {
 	if (this.status == 200) {
 		var data = JSON.parse(this.responseText);
-		console.log(data);
 		if (data.item != null) {
 			playerImageTag.src = data.item.album.images[0].url;
 			playerArtistTag.textContent = data.item.artists[0].name;
 			playerMusicNameTag.textContent = data.item.name;
+			playbackOffsetMS = data.progress_ms;
+			toggleIconPlayPause(!data.is_playing);
+			autoScroll(playerArtistTag, playerInfo);
+			autoScroll(playerMusicNameTag, playerInfo);
 		}
-
-		// if (data.device != null) {
-		// 	currentDevice = data.device.id;
-		// 	document.getElementById("devices").value = currentDevice;
-		// }
-
-		// if (data.context != null) {
-		// 	currentPlaylist = data.context.uri;
-		// 	currentPlaylist = currentPlaylist.substring(currentPlaylist.lastIndexOf(":") + 1, currentPlaylist.length);
-		// 	document.getElementById("playlists").value = currentPlaylist;
-		// }
 	} else if (this.status == 204) {
 	} else if (this.status == 401) {
 		refreshAccessToken();
 	} else {
 		console.log(this.responseText);
-		alert(this.responseText);
 	}
+}
+
+function handleNoPlayback() {
+	if (!access_token) {
+		playerArtistTag.textContent = "Autenticação necessária";
+		playerMusicNameTag.textContent = "Clique no ícone do Spotify para se autenticar";
+	}
+	if (!activeDevices) {
+		playerArtistTag.textContent = "Sem dispositivos ativos conectados";
+		playerMusicNameTag.textContent = "Abra o aplicativo do Spotify em algum lugar para este player funcionar";
+	}
+	autoScroll(playerArtistTag, playerInfo);
+	autoScroll(playerMusicNameTag, playerInfo);
 }

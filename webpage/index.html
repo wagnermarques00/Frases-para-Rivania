@@ -53,14 +53,18 @@
 			</section>
 
 			<section class="player" id="player">
-				<picture>
-					<source media="(min-width: 768px)" srcset="./src/assets/img/spotify/Spotify_Icon_RGB_Black.png" />
+				<picture id="spotify">
+					<source
+						media="(min-width: 768px)"
+						srcset="./src/assets/img/spotify/Spotify_Icon_RGB_Black.png"
+						loading="lazy"
+					/>
 					<img class="spotify" src="./src/assets/img/spotify/Spotify_Logo_RGB_Black.png" loading="lazy" />
 				</picture>
 
 				<div class="playback__wrapper">
 					<div class="player__button previous" loading="lazy" id="player-previous"></div>
-					<div class="player__button play" loading="lazy" id="play-pause"></div>
+					<div class="player__button play" loading="lazy" id="player-play-pause"></div>
 					<div class="player__button next" loading="lazy" id="player-next"></div>
 				</div>
 
@@ -72,7 +76,7 @@
 					alt="Capa da música em reprodução no momento"
 				/>
 				<div class="player__wrapper">
-					<p class="player__info" id="info-artist">A Banda Mais Bonita da Cidade</p>
+					<p class="player__info" id="info-artist"></p>
 					<p class="player__info" id="info-music"></p>
 				</div>
 			</section>

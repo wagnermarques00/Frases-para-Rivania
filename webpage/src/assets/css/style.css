@@ -565,7 +565,6 @@ input:checked + .toggle .star--6 {
   padding: 0.5rem 2.5rem;
   width: 10rem;
   height: 3rem;
-  background-image: url("./src/assets/img/spotify/Spotify_Icon_RGB_Black.png");
   border-radius: 1rem;
   box-shadow: inset -3px -3px 7px rgba(255, 255, 255, 0.4509803922), inset 2px 2px 5px rgba(94, 104, 121, 0.288);
 }
@@ -649,6 +648,7 @@ input:checked + .toggle .star--6 {
   box-shadow: inset -3px -3px 7px rgba(255, 255, 255, 0.4509803922), inset 2px 2px 5px rgba(94, 104, 121, 0.288);
 }
 .player .player__wrapper .player__info {
+  width: 100%;
   text-align: left;
   font-family: "Fira Sans", sans-serif;
   font-size: 1.5rem;
