@@ -1,4 +1,4 @@
-function clockUpdate() {
+function renderClockAndCalendar() {
 	const months = [
 		"janeiro",
 		"fevereiro",
@@ -26,4 +26,4 @@ function clockUpdate() {
 	fullDate.textContent = `${day < 10 ? "0" + day : day} de ${months[month]} de ${year}`;
 }
 
-export default clockUpdate;
+export default renderClockAndCalendar;
