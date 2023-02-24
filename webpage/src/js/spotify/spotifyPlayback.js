@@ -96,7 +96,8 @@ function handleCurrentlyPlayingResponse() {
 	if (this.status == 200) {
 		let data = JSON.parse(this.responseText);
 		if (data.item != null) {
-			playerImageTag.src = data.item.album.images[0].url;
+			console.log(data.item);
+			playerImageTag.src = data.item.album.images[2].url;
 			playerArtistTag.textContent = data.item.artists[0].name;
 			playerMusicNameTag.textContent = data.item.name;
 			playbackOffsetMS = data.progress_ms;

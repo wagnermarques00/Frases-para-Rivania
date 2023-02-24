@@ -6,7 +6,7 @@
 		<meta name="description" content="Frases, fotos e músicas para alegrar minha namorada" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" href="./src/assets/css/style.css" />
+		<link rel="stylesheet" href="./src/assets/css/style.css" defer />
 
 		<title>Frases</title>
 	</head>
@@ -56,13 +56,13 @@
 				<picture id="spotify">
 					<source
 						media="(min-width: 768px)"
-						srcset="./src/assets/img/spotify/Spotify_Icon_RGB_Black.png"
+						srcset="./src/assets/img/spotify/Spotify_Icon_RGB_Black_48.avif"
 						loading="lazy"
 						alt="ícone do Spotify"
 					/>
 					<img
 						class="spotify"
-						src="./src/assets/img/spotify/Spotify_Logo_RGB_Black.png"
+						src="./src/assets/img/spotify/Spotify_Logo_RGB_Black.avif"
 						loading="lazy"
 						alt="logotipo do Spotify"
 					/>
@@ -77,7 +77,7 @@
 				<img
 					class="player__image"
 					id="player__image"
-					src="./src/assets/img/1383354_599778530074976_729132350_n-580x580.jpg"
+					src="./src/assets/img/music.svg"
 					loading="lazy"
 					alt="Capa da música em reprodução no momento"
 				/>
@@ -87,7 +87,7 @@
 				</div>
 			</section>
 		</main>
-		<script src="./main.js" type="module"></script>
-		<script src="./src/js/spotify/spotifyApi.js" type="module"></script>
+		<script src="./main.js" type="module" defer></script>
+		<script src="./src/js/spotify/spotifyApi.js" type="module" defer></script>
 	</body>
 </html>
