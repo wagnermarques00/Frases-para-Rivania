@@ -95,10 +95,14 @@ export function currentlyPlaying() {
 function handleCurrentlyPlayingResponse() {
 	if (this.status == 200) {
 		let data = JSON.parse(this.responseText);
+		console.log(data.item.artists);
+		let currentArtists = formatArtists(data.item.artists);
+		let altCurrentMusic = `Tocando agora: ${data.item.name} de ${currentArtists}`;
 		if (data.item != null) {
 			console.log(data.item);
+			playerArtistTag.textContent = currentArtists;
+			playerImageTag.alt = altCurrentMusic;
 			playerImageTag.src = data.item.album.images[2].url;
-			playerArtistTag.textContent = data.item.artists[0].name;
 			playerMusicNameTag.textContent = data.item.name;
 			playbackOffsetMS = data.progress_ms;
 			toggleIconPlayPause(data.is_playing);
@@ -114,9 +118,25 @@ function handleCurrentlyPlayingResponse() {
 
 function checkDefaultPlaylist() {
 	let formatedID = "spotify:playlist:" + playlist_id;
+
 	if (currentPlaylist === formatedID) {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+function formatArtists(artists) {
+	let artistNames = artists.map((artist) => artist.name);
+
+	if (artistNames.length === 1) {
+		return artistNames[0];
+	} else if (artistNames.length === 2) {
+		return `${artistNames[0]} e ${artistNames[1]}`;
+	} else {
+		let lastArtistName = artistNames.pop();
+		let formattedArtists = artistNames.join(", ") + ` e ${lastArtistName}`;
+
+		return formattedArtists;
 	}
 }
