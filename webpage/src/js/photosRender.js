@@ -1,7 +1,4 @@
-import { photos } from "../constants/photos.js";
-
-function renderPhoto() {
-	const photoTag = document.querySelector(".card__image");
+function renderPhoto(photos, photoTag) {
 	const randomIndex = Math.floor(Math.random() * photos.length);
 	const photo = `/src/assets/img/photos/${photos[randomIndex]}`;
 

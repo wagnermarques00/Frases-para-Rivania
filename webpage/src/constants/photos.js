@@ -1,4 +1,4 @@
-export const photos = [
+const photos = [
 	"01.jpg",
 	"02.jpg",
 	"03.jpg",
@@ -41,3 +41,5 @@ export const photos = [
 	"41.jpg",
 	"42.jpg",
 ];
+
+export default photos;
