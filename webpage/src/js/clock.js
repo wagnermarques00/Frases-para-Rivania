@@ -1,4 +1,20 @@
 function renderClockAndCalendar() {
+	const date = new Date();
+	const clock = document.getElementById("clock");
+	const fullDate = document.getElementById("date");
+
+	renderClock(date, clock);
+	renderDate(date, fullDate);
+}
+
+function renderClock(date, clock) {
+	const hours = date.getHours();
+	const minutes = date.getMinutes();
+
+	clock.textContent = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+}
+
+function renderDate(date, fullDate) {
 	const months = [
 		"janeiro",
 		"fevereiro",
@@ -13,16 +29,11 @@ function renderClockAndCalendar() {
 		"novembro",
 		"dezembro",
 	];
-	const clock = document.getElementById("clock");
-	const fullDate = document.getElementById("date");
 
-	const date = new Date();
-	const hours = date.getHours();
-	const minutes = date.getMinutes();
 	const day = date.getDate();
 	const month = date.getMonth();
 	const year = date.getFullYear();
-	clock.textContent = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+
 	fullDate.textContent = `${day < 10 ? "0" + day : day} de ${months[month]} de ${year}`;
 }
 
