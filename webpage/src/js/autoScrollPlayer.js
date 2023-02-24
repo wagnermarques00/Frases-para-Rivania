@@ -1,4 +1,14 @@
 function autoScroll(text, container) {
+	var texWidth = measureElementWidth(text);
+
+	if (texWidth <= container.offsetWidth) {
+		text.style.animation = "none";
+	} else {
+		text.style.animation = "15s linear infinite scroll";
+	}
+}
+
+function measureElementWidth(text) {
 	var tmp = document.createElement("span");
 
 	tmp.style.fontSize = "1.5rem";
@@ -9,11 +19,7 @@ function autoScroll(text, container) {
 	var texWidth = tmp.offsetWidth;
 	document.body.removeChild(tmp);
 
-	if (texWidth <= container.offsetWidth) {
-		text.style.animation = "none";
-	} else {
-		text.style.animation = "15s linear infinite scroll";
-	}
+	return texWidth;
 }
 
 export default autoScroll;
