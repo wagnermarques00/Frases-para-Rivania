@@ -33,10 +33,10 @@ renderClockAndCalendar();
 renderPhoto(photos, photoTag);
 renderPhrase(authorTag, quoteTag);
 
-function updatableInFiveMinutes() {
-	renderPhoto();
-	renderPhrase(authorTag, quoteTag);
-}
-
 setInterval(renderClockAndCalendar, 1000);
 setInterval(updatableInFiveMinutes, FIVE_MINUTES);
+
+function updatableInFiveMinutes() {
+	renderPhoto(photos, photoTag);
+	renderPhrase(authorTag, quoteTag);
+}

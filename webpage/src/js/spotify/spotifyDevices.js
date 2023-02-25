@@ -2,10 +2,12 @@ import { callApi, refreshAccessToken } from "./spotifyAuthorization.js";
 import autoScroll from "../autoScrollPlayer.js";
 
 var activeDevices = false;
-const playerArtistTag = document.querySelector("#info-artist");
-const playerInfo = document.querySelector(".player__info");
-const playerMusicNameTag = document.querySelector("#info-music");
 const DEVICES = "https://api.spotify.com/v1/me/player/devices";
+const playerTags = {
+	artist: document.querySelector("#info-artist"),
+	info: document.querySelector(".player__info"),
+	musicName: document.querySelector("#info-music"),
+};
 
 function handleDevicesResponse() {
 	if (this.status == 200) {
@@ -23,7 +25,6 @@ function handleDevicesResponse() {
 		activeDevices = false;
 	} else {
 		activeDevices = false;
-		console.log(this.responseText);
 	}
 }
 
@@ -33,10 +34,10 @@ export function refreshDevices() {
 
 export function handleNoDevice() {
 	if (!activeDevices) {
-		playerArtistTag.textContent = "Sem dispositivos ativos conectados";
-		playerMusicNameTag.textContent = "Abra o aplicativo do Spotify em algum lugar para este player funcionar";
+		playerTags.artist.textContent = "Sem dispositivos ativos conectados";
+		playerTags.musicName.textContent = "Abra o aplicativo do Spotify em algum lugar para este player funcionar";
 	}
 
-	autoScroll(playerArtistTag, playerInfo);
-	autoScroll(playerMusicNameTag, playerInfo);
+	autoScroll(playerTags.artist, playerTags.info);
+	autoScroll(playerTags.musicName, playerTags.info);
 }

@@ -1,17 +1,19 @@
 import { callApi, refreshAccessToken } from "./spotifyAuthorization.js";
 import autoScroll from "../autoScrollPlayer.js";
 
-var defaultPlayer = true;
+const PLAYLIST_ID = "37i9dQZF1DX2vsux22VuNL";
+
 var isPlaying = false;
-var playlist_id = "37i9dQZF1DX2vsux22VuNL";
 var playbackOffsetMS = 0;
 var currentPlaylist = "";
 
-const playerArtistTag = document.querySelector("#info-artist");
-const playerImageTag = document.querySelector("#player__image");
-const playerInfo = document.querySelector(".player__info");
-const playerMusicNameTag = document.querySelector("#info-music");
-const playerPlayPauseTag = document.querySelector("#player-play-pause");
+const playerTags = {
+	artist: document.querySelector("#info-artist"),
+	image: document.querySelector("#player__image"),
+	info: document.querySelector(".player__info"),
+	musicName: document.querySelector("#info-music"),
+	playPause: document.querySelector("#player-play-pause"),
+};
 
 const PAUSE = "https://api.spotify.com/v1/me/player/pause";
 const PLAY = "https://api.spotify.com/v1/me/player/play";
@@ -19,24 +21,24 @@ const PREVIOUS = "https://api.spotify.com/v1/me/player/previous";
 const NEXT = "https://api.spotify.com/v1/me/player/next";
 const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
 
-export async function togglePlayPause() {
+export async function togglePlayPauseMusic() {
 	if (isPlaying) {
-		pause();
+		pauseMusic();
 	} else {
-		play();
+		playMusic();
 	}
 }
 
-export async function togglePlayPauseOnLoad() {
+export async function togglePlayPauseMusicOnLoad() {
 	if (checkDefaultPlaylist()) {
 		if (isPlaying) {
-			pause();
+			pauseMusic();
 		} else {
-			play();
+			playMusic();
 		}
 	} else {
 		if (isPlaying) {
-			pause();
+			pauseMusic();
 		} else {
 			playDefaultPlaylist();
 		}
@@ -45,37 +47,38 @@ export async function togglePlayPauseOnLoad() {
 
 export function toggleIconPlayPause(playing) {
 	if (playing) {
-		playerPlayPauseTag.classList.toggle("play", false);
-		playerPlayPauseTag.classList.toggle("pause", true);
+		playerTags.playPause.classList.toggle("play", false);
+		playerTags.playPause.classList.toggle("pause", true);
 	} else {
-		playerPlayPauseTag.classList.toggle("pause", false);
-		playerPlayPauseTag.classList.toggle("play", true);
+		playerTags.playPause.classList.toggle("pause", false);
+		playerTags.playPause.classList.toggle("play", true);
 	}
 	isPlaying = playing;
 }
 
-export function next() {
+export function nextMusic() {
 	callApi("POST", NEXT, null, handleApiPlaybackResponse);
 }
 
-function pause() {
+function pauseMusic() {
 	callApi("PUT", PAUSE, null, handleApiPlaybackResponse);
 }
-function play() {
+function playMusic() {
 	callApi("PUT", PLAY, null, handleApiPlaybackResponse);
 }
 
-export function previous() {
+export function previousMusic() {
 	callApi("POST", PREVIOUS, null, handleApiPlaybackResponse);
 }
 
 function playDefaultPlaylist() {
-	let body = {};
-	body.context_uri = "spotify:playlist:" + playlist_id;
-
-	body.offset = {};
-	body.offset.position = 0;
-	body.offset.position_ms = 0;
+	let body = {
+		context_uri: "spotify:playlist:" + PLAYLIST_ID,
+		offset: {
+			position: 0,
+			position_ms: 0,
+		},
+	};
 
 	callApi("PUT", PLAY, JSON.stringify(body), handleApiPlaybackResponse);
 }
@@ -95,19 +98,19 @@ export function currentlyPlaying() {
 function handleCurrentlyPlayingResponse() {
 	if (this.status == 200) {
 		let data = JSON.parse(this.responseText);
-		console.log(data.item.artists);
 		let currentArtists = formatArtists(data.item.artists);
 		let altCurrentMusic = `Tocando agora: ${data.item.name} de ${currentArtists}`;
+
 		if (data.item != null) {
-			console.log(data.item);
-			playerArtistTag.textContent = currentArtists;
-			playerImageTag.alt = altCurrentMusic;
-			playerImageTag.src = data.item.album.images[2].url;
-			playerMusicNameTag.textContent = data.item.name;
+			playerTags.artist.textContent = currentArtists;
+			playerTags.image.alt = altCurrentMusic;
+			playerTags.image.src = data.item.album.images[2].url;
+			playerTags.musicName.textContent = data.item.name;
 			playbackOffsetMS = data.progress_ms;
+
 			toggleIconPlayPause(data.is_playing);
-			autoScroll(playerArtistTag, playerInfo);
-			autoScroll(playerMusicNameTag, playerInfo);
+			autoScroll(playerTags.artist, playerTags.info);
+			autoScroll(playerTags.musicName, playerTags.info);
 		}
 	} else if (this.status == 401) {
 		refreshAccessToken();
@@ -117,7 +120,7 @@ function handleCurrentlyPlayingResponse() {
 }
 
 function checkDefaultPlaylist() {
-	let formatedID = "spotify:playlist:" + playlist_id;
+	let formatedID = "spotify:playlist:" + PLAYLIST_ID;
 
 	if (currentPlaylist === formatedID) {
 		return true;

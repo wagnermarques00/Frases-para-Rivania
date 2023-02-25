@@ -1,35 +1,43 @@
 import { handleNoToken, handleRedirect, requestAuthorization } from "./spotifyAuthorization.js";
 import { handleNoDevice, refreshDevices } from "./spotifyDevices.js";
-import { next, previous, togglePlayPause, togglePlayPauseOnLoad, currentlyPlaying } from "./spotifyPlayback.js";
+import {
+	currentlyPlaying,
+	nextMusic,
+	previousMusic,
+	togglePlayPauseMusic,
+	togglePlayPauseMusicOnLoad,
+} from "./spotifyPlayback.js";
 
-const playerNextTag = document.querySelector("#player-next");
-const playerPlayPauseTag = document.querySelector("#player-play-pause");
-const playerPreviousTag = document.querySelector("#player-previous");
-const playerSpotifyTag = document.querySelector("#spotify");
-let playClicked = false;
+let buttonPlayClicked = false;
+const playerTags = {
+	next: document.querySelector("#player-next"),
+	playPause: document.querySelector("#player-play-pause"),
+	previous: document.querySelector("#player-previous"),
+	spotify: document.querySelector("#spotify"),
+};
 
 window.addEventListener("load", () => {
 	onPageLoad();
 });
 
-playerNextTag.addEventListener("click", () => {
-	next();
+playerTags.next.addEventListener("click", () => {
+	nextMusic();
 });
 
-playerPlayPauseTag.addEventListener("click", () => {
-	if (playClicked) {
-		togglePlayPause();
+playerTags.playPause.addEventListener("click", () => {
+	if (buttonPlayClicked) {
+		togglePlayPauseMusic();
 	} else {
-		playClicked = true;
-		togglePlayPauseOnLoad();
+		buttonPlayClicked = true;
+		togglePlayPauseMusicOnLoad();
 	}
 });
 
-playerPreviousTag.addEventListener("click", () => {
-	previous();
+playerTags.previous.addEventListener("click", () => {
+	previousMusic();
 });
 
-playerSpotifyTag.addEventListener("click", () => {
+playerTags.spotify.addEventListener("click", () => {
 	requestAuthorization();
 });
 
@@ -37,10 +45,10 @@ async function onPageLoad() {
 	if (window.location.search.length > 0) {
 		handleRedirect();
 	}
-	setInterval(constantChecks, 1000);
+	setInterval(frequentChecks, 1000);
 }
 
-function constantChecks() {
+function frequentChecks() {
 	currentlyPlaying();
 	refreshDevices();
 	handleNoDevice();
