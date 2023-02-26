@@ -6,6 +6,7 @@ const PLAYLIST_ID = "37i9dQZF1DX2vsux22VuNL";
 var isPlaying = false;
 var playbackOffsetMS = 0;
 var currentPlaylist = "";
+var currentIdMusic = "";
 
 const playerTags = {
 	artist: document.querySelector("#info-artist"),
@@ -98,19 +99,23 @@ export function currentlyPlaying() {
 function handleCurrentlyPlayingResponse() {
 	if (this.status == 200) {
 		let data = JSON.parse(this.responseText);
-		let currentArtists = formatArtists(data.item.artists);
-		let altCurrentMusic = `Tocando agora: ${data.item.name} de ${currentArtists}`;
 
 		if (data.item != null) {
-			playerTags.artist.textContent = currentArtists;
-			playerTags.image.alt = altCurrentMusic;
-			playerTags.image.src = data.item.album.images[2].url;
-			playerTags.musicName.textContent = data.item.name;
-			playbackOffsetMS = data.progress_ms;
+			if (data.item.id !== currentIdMusic) {
+				let currentArtists = formatArtists(data.item.artists);
+				let altCurrentMusic = `Tocando agora: ${data.item.name} de ${currentArtists}`;
 
-			toggleIconPlayPause(data.is_playing);
-			autoScroll(playerTags.artist, playerTags.info);
-			autoScroll(playerTags.musicName, playerTags.info);
+				currentIdMusic = data.item.id;
+				playerTags.artist.textContent = currentArtists;
+				playerTags.image.alt = altCurrentMusic;
+				playerTags.image.src = data.item.album.images[2].url;
+				playerTags.musicName.textContent = data.item.name;
+				playbackOffsetMS = data.progress_ms;
+
+				toggleIconPlayPause(data.is_playing);
+				autoScroll(playerTags.artist, playerTags.info);
+				autoScroll(playerTags.musicName, playerTags.info);
+			}
 		}
 	} else if (this.status == 401) {
 		refreshAccessToken();

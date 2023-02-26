@@ -36,8 +36,8 @@ export function handleNoDevice() {
 	if (!activeDevices) {
 		playerTags.artist.textContent = "Sem dispositivos ativos conectados";
 		playerTags.musicName.textContent = "Abra o aplicativo do Spotify em algum lugar para este player funcionar";
-	}
 
-	autoScroll(playerTags.artist, playerTags.info);
-	autoScroll(playerTags.musicName, playerTags.info);
+		autoScroll(playerTags.artist, playerTags.info);
+		autoScroll(playerTags.musicName, playerTags.info);
+	}
 }

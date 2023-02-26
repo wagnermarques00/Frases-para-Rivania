@@ -103,8 +103,8 @@ export function handleNoToken() {
 	if (!access_token) {
 		playerArtistTag.textContent = "Autenticação necessária";
 		playerMusicNameTag.textContent = "Clique no ícone do Spotify para se autenticar";
-	}
 
-	autoScroll(playerArtistTag, playerInfo);
-	autoScroll(playerMusicNameTag, playerInfo);
+		autoScroll(playerArtistTag, playerInfo);
+		autoScroll(playerMusicNameTag, playerInfo);
+	}
 }
