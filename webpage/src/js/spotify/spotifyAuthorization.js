@@ -1,4 +1,6 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from "../../constants/spotifyAuth.js";
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+
 import autoScroll from "../autoScrollPlayer.js";
 
 var access_token = localStorage.getItem("access_token");
