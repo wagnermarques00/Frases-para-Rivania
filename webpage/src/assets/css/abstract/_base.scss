@@ -3,7 +3,7 @@ html,
 body,
 main {
 	height: auto;
-	// min-height: 100vh;
+	min-height: 100%;
 	max-width: 100vw;
 	box-sizing: border-box;
 }
@@ -31,7 +31,7 @@ main {
 
 @media screen and (min-width: $screen-computer) {
 	main {
-		gap: 2rem;
+		gap: 1.5rem;
 		padding: 1rem 0;
 	}
 }
