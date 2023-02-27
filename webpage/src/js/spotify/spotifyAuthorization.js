@@ -1,8 +1,4 @@
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-
-console.log("SPOTIFY_CLIENT_ID");
-
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from "../../constants/spotifyAuth.js";
 import autoScroll from "../autoScrollPlayer.js";
 
 var access_token = localStorage.getItem("access_token");
@@ -21,7 +17,7 @@ export function requestAuthorization() {
 		"&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
 
 	let url = AUTHORIZE;
-	url += "?client_id=" + CLIENT_ID;
+	url += "?client_id=" + SPOTIFY_CLIENT_ID;
 	url += "&response_type=code";
 	url += "&redirect_uri=" + encodeURI(redirect_uri);
 	url += "&show_dialog=true";
@@ -52,8 +48,8 @@ function fetchAccessToken(code) {
 	let body = "grant_type=authorization_code";
 	body += "&code=" + code;
 	body += "&redirect_uri=" + encodeURI(redirect_uri);
-	body += "&client_id=" + CLIENT_ID;
-	body += "&client_secret=" + CLIENT_SECRET;
+	body += "&client_id=" + SPOTIFY_CLIENT_ID;
+	body += "&client_secret=" + SPOTIFY_CLIENT_SECRET;
 
 	callAuthorizationApi(body);
 }
@@ -62,7 +58,7 @@ export function refreshAccessToken() {
 	refresh_token = localStorage.getItem("refresh_token");
 	let body = "grant_type=refresh_token";
 	body += "&refresh_token=" + refresh_token;
-	body += "&client_id=" + CLIENT_ID;
+	body += "&client_id=" + SPOTIFY_CLIENT_ID;
 
 	callAuthorizationApi(body);
 }
@@ -71,7 +67,7 @@ function callAuthorizationApi(body) {
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", TOKEN, true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.setRequestHeader("Authorization", "Basic " + btoa(CLIENT_ID + ":" + CLIENT_SECRET));
+	xhr.setRequestHeader("Authorization", "Basic " + btoa(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET));
 	xhr.send(body);
 
 	xhr.onload = handleAuthorizationResponse;
