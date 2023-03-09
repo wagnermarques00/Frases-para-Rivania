@@ -3,7 +3,12 @@
     publish = "./"
 
 [[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
+  for = "/*.js"
+    [headers.values]
+      Access-Control-Allow-Origin = "*"
+
+[[redirects]]
+  from = "/*"
+  to = "https://frases-para-rivania.netlify.app/:splat"
+  status = 301
+  force = true
