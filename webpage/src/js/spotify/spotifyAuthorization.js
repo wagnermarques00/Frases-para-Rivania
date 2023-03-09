@@ -1,25 +1,37 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from "../../constants/spotifyAuth.js";
 import autoScroll from "../autoScrollPlayer.js";
 
-var access_token = localStorage.getItem("access_token");
-var redirect_uri = "http://127.0.0.1:5500/index.html";
-var refresh_token = localStorage.getItem("refresh_token");
+const AUTHORIZE = "https://accounts.spotify.com/authorize";
+const NETLIFY_PATH = "/.netlify/functions/fetch-spotify";
+const REDIRECT_URI = "http://localhost:8888/index.html";
+const TOKEN = "https://accounts.spotify.com/api/token";
+
+let client_id = "";
+let client_secret = "";
 
 const playerArtistTag = document.querySelector("#info-artist");
 const playerInfo = document.querySelector(".player__info");
 const playerMusicNameTag = document.querySelector("#info-music");
 
-const AUTHORIZE = "https://accounts.spotify.com/authorize";
-const TOKEN = "https://accounts.spotify.com/api/token";
+let access_token = localStorage.getItem("access_token");
+let refresh_token = localStorage.getItem("refresh_token");
+
+async function initAuthorization() {
+	const response = await fetch(NETLIFY_PATH);
+	const data = await response.json();
+	client_id = data.id;
+	client_secret = data.secret;
+}
+
+initAuthorization();
 
 export function requestAuthorization() {
 	let scope =
 		"&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
 
 	let url = AUTHORIZE;
-	url += "?client_id=" + SPOTIFY_CLIENT_ID;
+	url += "?client_id=" + client_id;
 	url += "&response_type=code";
-	url += "&redirect_uri=" + encodeURI(redirect_uri);
+	url += "&redirect_uri=" + encodeURI(REDIRECT_URI);
 	url += "&show_dialog=true";
 	url += scope;
 
@@ -30,7 +42,7 @@ export function handleRedirect() {
 	let code = getCode();
 
 	fetchAccessToken(code);
-	window.history.pushState("", "", redirect_uri);
+	window.history.pushState("", "", REDIRECT_URI);
 }
 
 function getCode() {
@@ -44,12 +56,14 @@ function getCode() {
 	return code;
 }
 
-function fetchAccessToken(code) {
+async function fetchAccessToken(code) {
+	await initAuthorization();
+
 	let body = "grant_type=authorization_code";
 	body += "&code=" + code;
-	body += "&redirect_uri=" + encodeURI(redirect_uri);
-	body += "&client_id=" + SPOTIFY_CLIENT_ID;
-	body += "&client_secret=" + SPOTIFY_CLIENT_SECRET;
+	body += "&redirect_uri=" + encodeURI(REDIRECT_URI);
+	body += "&client_id=" + client_id;
+	body += "&client_secret=" + client_secret;
 
 	callAuthorizationApi(body);
 }
@@ -58,7 +72,7 @@ export function refreshAccessToken() {
 	refresh_token = localStorage.getItem("refresh_token");
 	let body = "grant_type=refresh_token";
 	body += "&refresh_token=" + refresh_token;
-	body += "&client_id=" + SPOTIFY_CLIENT_ID;
+	body += "&client_id=" + client_id;
 
 	callAuthorizationApi(body);
 }
@@ -67,7 +81,7 @@ function callAuthorizationApi(body) {
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", TOKEN, true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.setRequestHeader("Authorization", "Basic " + btoa(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET));
+	xhr.setRequestHeader("Authorization", "Basic " + btoa(client_id + ":" + client_secret));
 	xhr.send(body);
 
 	xhr.onload = handleAuthorizationResponse;
