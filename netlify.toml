@@ -1,13 +1,10 @@
 [build]
-    functions = "./netlify/functions"
-    publish = "./"
+  functions = "./netlify/functions"
+  publish = "./"
 
 [[headers]]
-  for = "/*.js"
-    [headers.values]
-      Access-Control-Allow-Origin = "*"
-
-[[redirects]]
-  from = "https://d33wubrfki0l68.cloudfront.net/b914b43150b08ac2c496f3cdd17f834dd815b49d/59a38"
-  to = "https://frases-para-rivania.netlify.app/"
-  status = 200
+  for = "/"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization"
