@@ -12,8 +12,8 @@ const playerArtistTag = document.querySelector("#info-artist");
 const playerInfo = document.querySelector(".player__info");
 const playerMusicNameTag = document.querySelector("#info-music");
 
-let access_token = localStorage.getItem("access_token");
-let refresh_token = localStorage.getItem("refresh_token");
+export let access_token = localStorage.getItem("access_token");
+export let refresh_token = localStorage.getItem("refresh_token");
 
 async function initAuthorization() {
 	const response = await fetch(NETLIFY_PATH);

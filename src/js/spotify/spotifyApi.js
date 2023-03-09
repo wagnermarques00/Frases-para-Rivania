@@ -1,4 +1,10 @@
-import { handleNoToken, handleRedirect, requestAuthorization } from "./spotifyAuthorization.js";
+import {
+	access_token,
+	refresh_token,
+	handleNoToken,
+	handleRedirect,
+	requestAuthorization,
+} from "./spotifyAuthorization.js";
 import { handleNoDevice, refreshDevices } from "./spotifyDevices.js";
 import {
 	currentlyPlaying,
@@ -49,8 +55,11 @@ async function onPageLoad() {
 }
 
 function frequentChecks() {
-	currentlyPlaying();
-	refreshDevices();
-	handleNoDevice();
-	handleNoToken();
+	if (access_token || refresh_token) {
+		currentlyPlaying();
+		refreshDevices();
+		handleNoDevice();
+	} else {
+		handleNoToken();
+	}
 }
