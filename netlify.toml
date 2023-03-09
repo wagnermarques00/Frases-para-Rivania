@@ -8,6 +8,6 @@
       Access-Control-Allow-Origin = "*"
 
 [[redirects]]
-  from = "./*"
-  to = "https://frases-para-rivania.netlify.app"
+  from = "https://d33wubrfki0l68.cloudfront.net/b914b43150b08ac2c496f3cdd17f834dd815b49d/59a38"
+  to = "https://frases-para-rivania.netlify.app/"
   status = 200
