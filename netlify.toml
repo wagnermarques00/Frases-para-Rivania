@@ -9,6 +9,6 @@
 
 [[redirects]]
   from = "/*"
-  to = "https://frases-para-rivania.netlify.app/:splat"
+  to = "https://frases-para-rivania.netlify.app/"
   status = 301
   force = true
