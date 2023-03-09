@@ -1,5 +1,5 @@
-# Local Netlify folder
-.netlify
-webpage/yarn-error.log
 node_modules
 .env
+.vscode
+# Local Netlify folder
+.netlify

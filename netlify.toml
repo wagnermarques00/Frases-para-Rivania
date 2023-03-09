@@ -1,4 +1,4 @@
 [build]
-    functions = "./webpage/netlify/functions/"
-    publish = "./webpage"
+    functions = "./netlify/functions"
+    publish = "./"
 
