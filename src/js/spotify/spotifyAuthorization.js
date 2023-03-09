@@ -2,7 +2,7 @@ import autoScroll from "../autoScrollPlayer.js";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const NETLIFY_PATH = "/.netlify/functions/fetch-spotify";
-const REDIRECT_URI = "http://localhost:8888/index.html";
+const REDIRECT_URI = "https://frases-para-rivania.netlify.app/";
 const TOKEN = "https://accounts.spotify.com/api/token";
 
 let client_id = "";
