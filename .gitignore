@@ -1,3 +1,5 @@
 # Local Netlify folder
 .netlify
 webpage/yarn-error.log
+node_modules
+.env
