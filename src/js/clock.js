@@ -1,3 +1,6 @@
+let actualMinute = "";
+let actualDay = "";
+
 function renderClockAndCalendar() {
 	const date = new Date();
 	const clock = document.getElementById("clock");
@@ -11,7 +14,10 @@ function renderClock(date, clock) {
 	const hours = date.getHours();
 	const minutes = date.getMinutes();
 
-	clock.textContent = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+	if (actualMinute != minutes) {
+		actualMinute = minutes;
+		clock.textContent = `${hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+	}
 }
 
 function renderDate(date, fullDate) {
@@ -34,7 +40,10 @@ function renderDate(date, fullDate) {
 	const month = date.getMonth();
 	const year = date.getFullYear();
 
-	fullDate.textContent = `${day < 10 ? "0" + day : day} de ${months[month]} de ${year}`;
+	if (actualDay != day) {
+		actualDay = day;
+		fullDate.textContent = `${day < 10 ? "0" + day : day} de ${months[month]} de ${year}`;
+	}
 }
 
 export default renderClockAndCalendar;
