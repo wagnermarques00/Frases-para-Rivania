@@ -26,7 +26,7 @@ initAuthorization();
 
 export function requestAuthorization() {
 	let scope =
-		"&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
+		"&scope=user-modify-playback-state user-read-playback-position streaming user-read-playback-state user-read-recently-played";
 
 	let url = AUTHORIZE;
 	url += "?client_id=" + client_id;
