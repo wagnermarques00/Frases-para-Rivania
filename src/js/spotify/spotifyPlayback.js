@@ -101,6 +101,10 @@ function handleCurrentlyPlayingResponse() {
 		let data = JSON.parse(this.responseText);
 
 		if (data.item != null) {
+			if (isPlaying != data.is_playing) {
+				toggleIconPlayPause(data.is_playing);
+			}
+
 			if (data.item.id !== currentIdMusic) {
 				let currentArtists = formatArtists(data.item.artists);
 				let altCurrentMusic = `Tocando agora: ${data.item.name} de ${currentArtists}`;
@@ -112,7 +116,6 @@ function handleCurrentlyPlayingResponse() {
 				playerTags.musicName.textContent = data.item.name;
 				playbackOffsetMS = data.progress_ms;
 
-				toggleIconPlayPause(data.is_playing);
 				autoScroll(playerTags.artist, playerTags.info);
 				autoScroll(playerTags.musicName, playerTags.info);
 			}
