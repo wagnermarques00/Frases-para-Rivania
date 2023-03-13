@@ -46,6 +46,10 @@
 				width: 2rem;
 				border-radius: 1rem;
 			}
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.play:before,
@@ -147,6 +151,10 @@
 			height: 3rem;
 
 			border-radius: 100%;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 
 		.player__button {
