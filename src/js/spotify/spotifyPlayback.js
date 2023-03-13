@@ -1,13 +1,17 @@
 import { callApi, refreshAccessToken } from "./spotifyAuthorization.js";
 import autoScroll from "../autoScrollPlayer.js";
 
-const PLAYLIST_ID = "37i9dQZF1DX2vsux22VuNL";
-
 var isPlaying = false;
 var playbackOffsetMS = 0;
 var currentPlaylist = "";
 var currentIdMusic = "";
 
+const PAUSE = "https://api.spotify.com/v1/me/player/pause";
+const PLAY = "https://api.spotify.com/v1/me/player/play";
+const PLAYLIST_ID = "37i9dQZF1DX2vsux22VuNL";
+const PREVIOUS = "https://api.spotify.com/v1/me/player/previous";
+const NEXT = "https://api.spotify.com/v1/me/player/next";
+const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
 const playerTags = {
 	artist: document.querySelector("#info-artist"),
 	image: document.querySelector("#player__image"),
@@ -15,12 +19,6 @@ const playerTags = {
 	musicName: document.querySelector("#info-music"),
 	playPause: document.querySelector("#player-play-pause"),
 };
-
-const PAUSE = "https://api.spotify.com/v1/me/player/pause";
-const PLAY = "https://api.spotify.com/v1/me/player/play";
-const PREVIOUS = "https://api.spotify.com/v1/me/player/previous";
-const NEXT = "https://api.spotify.com/v1/me/player/next";
-const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
 
 export async function togglePlayPauseMusic() {
 	if (isPlaying) {
@@ -54,6 +52,7 @@ export function toggleIconPlayPause(playing) {
 		playerTags.playPause.classList.toggle("pause", false);
 		playerTags.playPause.classList.toggle("play", true);
 	}
+
 	isPlaying = playing;
 }
 

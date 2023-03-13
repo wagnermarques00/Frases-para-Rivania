@@ -1,6 +1,6 @@
 import {
-	access_token,
-	refresh_token,
+	accessToken,
+	refreshToken,
 	handleNoToken,
 	handleRedirect,
 	requestAuthorization,
@@ -55,7 +55,7 @@ async function onPageLoad() {
 }
 
 function frequentChecks() {
-	if (access_token || refresh_token) {
+	if (accessToken || refreshToken) {
 		currentlyPlaying();
 		refreshDevices();
 		handleNoDevice();
