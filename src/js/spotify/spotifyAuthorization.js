@@ -2,7 +2,7 @@ import autoScroll from "../autoScrollPlayer.js";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const NETLIFY_PATH = "/.netlify/functions/fetch-spotify";
-const REDIRECT_URI = "https://frases-para-rivania.netlify.app/";
+const REDIRECT_URI = "https://frases-para-rivania.netlify.app/"; // change to use locally
 const TOKEN = "https://accounts.spotify.com/api/token";
 const playerTags = {
 	artist: document.querySelector("#info-artist"),
@@ -10,11 +10,12 @@ const playerTags = {
 	musicName: document.querySelector("#info-music"),
 };
 
-let clientId = "";
-let clientSecret = "";
+let clientId = ""; // insert if testing locally without netlify
+let clientSecret = ""; // insert if testing locally without netlify
 export let accessToken = localStorage.getItem("access_token");
 export let refreshToken = localStorage.getItem("refresh_token");
 
+// comment this function if testing locally without netlify
 async function initAuthorization() {
 	const response = await fetch(NETLIFY_PATH);
 	const data = await response.json();
@@ -22,7 +23,7 @@ async function initAuthorization() {
 	clientSecret = data.secret;
 }
 
-initAuthorization();
+initAuthorization(); // comment this function if testing locally without netlify
 
 export function requestAuthorization() {
 	let scope =
