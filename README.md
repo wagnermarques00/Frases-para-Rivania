@@ -46,8 +46,9 @@ Este é o meu primeiro projeto solo, criado com o objetivo de surpreender minha 
 
 A aplicação está disponível através deste link: https://frases-para-rivania.netlify.app/.
 
-*Observação: Por proteção da API do Spotify, infelizmente a autenticação não funcionará para usuários externos, pois o aplicativo possui apenas a permissão de desenvolvedor, não de ser público. Portanto, algumas funcionalidades que dependem da autenticação do Spotify podem não funcionar corretamente.*
 Caso queira testar em sua máquina, favor acessar [este README](./README(rodarLocalmente).md)
+
+*Observação: Por proteção da API do Spotify, infelizmente a autenticação não funcionará para usuários externos, pois o aplicativo possui apenas a permissão de desenvolvedor, não de ser público. Portanto, algumas funcionalidades que dependem da autenticação do Spotify podem não funcionar corretamente.*
 
 ## Como Testar
 
