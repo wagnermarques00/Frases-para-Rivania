@@ -14,6 +14,7 @@ Para conseguir autenticar na API do Spotify, é necessário seguir alguns passos
 - Visualização da música tocando atualmente
 - Play/Pause das músicas
 - Seleção da próxima música ou música anterior
+- Tocador de playlist atual em caso de não haver nada tocando no dispositivo ativo
 
 ## Referências
 
